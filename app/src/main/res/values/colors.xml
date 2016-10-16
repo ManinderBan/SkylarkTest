@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/colorPrimaryBlackDark</color>
+    <color name="colorPrimaryDark">@color/colorPrimaryBlackDark</color>
+    <color name="colorAccent">@color/colorPrimaryRed</color>
+
+    <color name="colorPrimaryIndigo">#3F51B5</color>
+    <color name="colorPrimaryIndigoDark">#303F9F</color>
+    <color name="colorAccentPink">#FF4081</color>
+
+    <color name="colorPrimaryBlack">#424242</color>
+    <color name="colorPrimaryBlackDark">#212121</color>
+    <color name="colorAccentCyan">#00BCD4</color>
+
+    <color name="colorPrimaryRed">#F44336</color>
+
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="black_50">#191919</color>
+</resources>

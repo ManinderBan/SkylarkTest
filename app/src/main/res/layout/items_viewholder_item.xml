@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/title_item"
+        android:textColor="@color/colorPrimaryRed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/itemsViewHolderRecycler"
+        android:name="com.maninder.skylarktest.setcontents.customviews.ItemsViewHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.maninder.skylarktest.setcontents.customviews.ItemsViewHolder"
+        tools:listitem="@layout/episode_item" />
+</LinearLayout>

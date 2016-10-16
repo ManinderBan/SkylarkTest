@@ -6,9 +6,14 @@ Skylark has API endpoints for Sets and TV Episodes.
 The purpose of this application is to show how to create a presentable Application using this API.
 
 #API Documentation
-For this Test we used Two different API.
+For this Test we used Skylark API to get the endpoint to retrieve the right data.
+
 Sets API: Allow to get all the Sets from Server and show to the user.
+
+Image API: Get the Image information.
+
 Episode API: Allow to get all information about a single Episode.
+
 
 #Architecture
 For this test I used MVP + Clean Architecture.

@@ -16,6 +16,8 @@ import com.maninder.skylarktest.data.remote.service.ImageUrlService;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,20 +30,12 @@ import rx.schedulers.Schedulers;
 /**
  * Implementation of the data source that adds a latency simulating network.
  */
+@Singleton
 public class SkylarkRemoteDataSource implements SkylarkDataSource {
 
     private static final String LOG = "SkylarkRemoteDataSource";
 
-    private static SkylarkRemoteDataSource INSTANCE;
-
-    public static SkylarkRemoteDataSource getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new SkylarkRemoteDataSource();
-        }
-        return INSTANCE;
-    }
-
-    private SkylarkRemoteDataSource() {
+    public SkylarkRemoteDataSource() {
     }
 
     /**

@@ -25,7 +25,7 @@ public class RestClient {
     public static final String REST_API_URL = "http://feature-code-test.skylark-cms.qa.aws.ostmodern.co.uk:8000/";
 
 
-    private static Retrofit s_retrofit;
+    private static Retrofit skylarkRetrofit;
 
     /**
      * Set 200 second time outs, after that retrofit get an error.
@@ -36,7 +36,7 @@ public class RestClient {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
-        s_retrofit = new Retrofit.Builder()
+        skylarkRetrofit = new Retrofit.Builder()
                 .baseUrl(REST_API_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -45,6 +45,6 @@ public class RestClient {
     }
 
     public static <T> T getService(Class<T> serviceClass) {
-        return s_retrofit.create(serviceClass);
+        return skylarkRetrofit.create(serviceClass);
     }
 }

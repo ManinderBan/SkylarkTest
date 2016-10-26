@@ -11,6 +11,8 @@ import com.maninder.skylarktest.threading.UseCaseHandler;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -22,7 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * This class listen the user actions from the UI {@link SetContentsFragment}, retrieves the data from UseCase
  * and updates the UI as required
  */
-public class SetContentsPresenter implements SetContentsContract.Presenter {
+final public class SetContentsPresenter implements SetContentsContract.Presenter {
 
 
     private final SetContentsContract.View mContentView;
@@ -36,6 +38,7 @@ public class SetContentsPresenter implements SetContentsContract.Presenter {
      * @param getSetContents  Usecase that allow to retrieve the Set Contents from {@link com.maninder.skylarktest.data.SkylarkRepository}
      * @param imageURLRequest UseCase that allow to retrieve Image ddownload url form {@link com.maninder.skylarktest.data.remote.SkylarkRemoteDataSource]}
      */
+    @Inject
     public SetContentsPresenter(@NonNull SetContentsContract.View view,
                                 @NonNull UseCaseHandler useCaseHandler,
                                 @NonNull GetSetContents getSetContents,
@@ -45,6 +48,10 @@ public class SetContentsPresenter implements SetContentsContract.Presenter {
         mGetSetContents = checkNotNull(getSetContents);
         mImageURLRequest = checkNotNull(imageURLRequest);
 
+    }
+
+    @Inject
+    public void setupPresenter() {
         mContentView.setPresenter(this);
     }
 

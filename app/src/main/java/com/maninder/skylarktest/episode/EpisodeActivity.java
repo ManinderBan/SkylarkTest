@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.maninder.skylarktest.Injection;
 import com.maninder.skylarktest.R;
+import com.maninder.skylarktest.SkylarkApplication;
+import com.maninder.skylarktest.episode.injection.DaggerEpisodeComponent;
+import com.maninder.skylarktest.episode.injection.EpisodeModule;
+
+import javax.inject.Inject;
 
 /**
  * Created by Maninder on 14/10/16.
@@ -20,6 +24,8 @@ public class EpisodeActivity extends AppCompatActivity {
     public static final String SET_REQUEST = "setRequest";
     public static final String TYPE_REQUEST = "bundleType";
 
+    @Inject
+    EpisodePresenter mEpisodePresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,11 +46,11 @@ public class EpisodeActivity extends AppCompatActivity {
             episodeFragment = EpisodeFragment.getINSTANCE(value, isSet);
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrameEpisode, episodeFragment).commit();
         }
-        new EpisodePresenter(
-                episodeFragment,
-                Injection.provideUseCaseHandler(),
-                Injection.provideGetEpisodeInfo(getApplicationContext()),
-                Injection.provideGetAssetInfo(getApplicationContext()),
-                Injection.provideSetInfo(getApplicationContext()));
+
+        DaggerEpisodeComponent.builder()
+                .episodeModule(new EpisodeModule(episodeFragment,
+                        ((SkylarkApplication) getApplication()).getSkylarkRepositoryComponent().getSkylarkRepository()))
+                .build()
+                .inject(this);
     }
 }

@@ -7,8 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.maninder.skylarktest.Injection;
 import com.maninder.skylarktest.R;
+import com.maninder.skylarktest.SkylarkApplication;
+import com.maninder.skylarktest.setcontents.injection.DaggerSetContentsComponent;
+import com.maninder.skylarktest.setcontents.injection.SetContentsModule;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
-
-    private SetContentsPresenter mSetContentsPresenter;
+    @Inject
+    SetContentsPresenter mSetContentsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +51,12 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrame, setContentsFragment).commit();
         }
 
-        //Create my Presenter that hold Set content Use case and Application handler
-        mSetContentsPresenter = new SetContentsPresenter(
-                setContentsFragment,
-                Injection.provideUseCaseHandler(),
-                Injection.provideGetSetContents(getApplicationContext()),
-                Injection.provideImageUrlRequest(getApplicationContext()));
-
+        //Create the Presenter
+        DaggerSetContentsComponent.builder()
+                .setContentsModule(new SetContentsModule(setContentsFragment,
+                        ((SkylarkApplication) getApplication()).getSkylarkRepositoryComponent().getSkylarkRepository()))
+                .build()
+                .inject(this);
     }
 
 

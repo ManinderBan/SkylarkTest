@@ -16,7 +16,7 @@ Episode API: Allow to get all information about a single Episode.
 
 
 #Architecture
-For this test I used MVP + Clean Architecture.
+For this test I used MVP + Clean Architecture and Dependency Injection.
 You can find here More information about this type of architecture: https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029#.a74dia9w5
 
 1. MVP: Model View Presenter pattern from the base sample.
@@ -38,8 +38,12 @@ This approach uses packages to reflect the feature set.
 - com.maninder.skylarktest.episode: Contains classes related to Episode Layout.
 - com.maninder.skylarktest.setcontents: Contains classes related to Set Contents List. Contain also subpackage related to this features.
 - com.maninder.skylarktest.threading: Is a subpackage for all background stuff.
+- com.maninder.skylarktest.utils: Utils.
 
 #Dependency
+
+Dagger 2: Dependency Injection
+
 Retrofit 2.0: retrieve and show data from Server.
 
 RxJava: Get Async Server request.

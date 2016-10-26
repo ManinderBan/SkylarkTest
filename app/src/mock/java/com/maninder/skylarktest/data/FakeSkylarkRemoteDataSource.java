@@ -22,21 +22,11 @@ import java.util.Map;
 public class FakeSkylarkRemoteDataSource implements SkylarkDataSource {
 
 
-    private static FakeSkylarkRemoteDataSource INSTANCE;
-
     private static final Map<String, Set> SETS_SERVICE_DATA = new LinkedHashMap<>();
 
     // Prevent direct instantiation.
-    private FakeSkylarkRemoteDataSource() {
+    public FakeSkylarkRemoteDataSource() {
     }
-
-    public static FakeSkylarkRemoteDataSource getINSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new FakeSkylarkRemoteDataSource();
-        }
-        return INSTANCE;
-    }
-
 
     @Override
     public void saveSets(@NonNull List<Set> setList) {

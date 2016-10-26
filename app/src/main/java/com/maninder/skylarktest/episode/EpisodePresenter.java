@@ -8,6 +8,8 @@ import com.maninder.skylarktest.episode.usecase.SetInfo;
 import com.maninder.skylarktest.threading.UseCase;
 import com.maninder.skylarktest.threading.UseCaseHandler;
 
+import javax.inject.Inject;
+
 /**
  * Created by Maninder on 14/10/16.
  */
@@ -17,7 +19,7 @@ import com.maninder.skylarktest.threading.UseCaseHandler;
  * This class listen the user actions from the UI {@link EpisodeFragment}, retrieves the data from UseCase
  * and updates the UI as required
  */
-public class EpisodePresenter implements EpisodeContract.Presenter {
+final public class EpisodePresenter implements EpisodeContract.Presenter {
 
     private final UseCaseHandler mUseCaseHandler;
     private final EpisodeContract.View mView;
@@ -32,6 +34,7 @@ public class EpisodePresenter implements EpisodeContract.Presenter {
      * @param getAssetsInfo  Usecase that allow to retrieve the Episode asset from {@link com.maninder.skylarktest.data.SkylarkRepository}
      * @param setInfo        UseCase that allow to retrieve the Set information form {@link com.maninder.skylarktest.data.SkylarkRepository}
      */
+    @Inject
     public EpisodePresenter(@NonNull EpisodeContract.View view,
                             @NonNull UseCaseHandler useCaseHandler, @NonNull GetEpisodeInfo getEpisodeInfo,
                             @NonNull GetAssetsInfo getAssetsInfo, @NonNull SetInfo setInfo) {
@@ -40,7 +43,10 @@ public class EpisodePresenter implements EpisodeContract.Presenter {
         mGetAssetsInfo = getAssetsInfo;
         mSetInfo = setInfo;
         mView = view;
+    }
 
+    @Inject
+    public void setupPresenter() {
         mView.setPresenter(this);
     }
 
@@ -50,6 +56,7 @@ public class EpisodePresenter implements EpisodeContract.Presenter {
 
     /**
      * Load the Episode Info from repository
+     *
      * @param episodeURL URL Episode required to get the right information
      */
 
@@ -74,7 +81,8 @@ public class EpisodePresenter implements EpisodeContract.Presenter {
 
     /**
      * Get the Episode information
-     * @param episodeURL  required to get the Episode info
+     *
+     * @param episodeURL required to get the Episode info
      */
     @Override
     public void loadAssetEpisode(@NonNull String episodeURL) {
@@ -98,6 +106,7 @@ public class EpisodePresenter implements EpisodeContract.Presenter {
 
     /**
      * Get the Set information
+     *
      * @param self rquired to identify the right Set
      */
     @Override

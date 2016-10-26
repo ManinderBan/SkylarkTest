@@ -14,6 +14,8 @@ import com.maninder.skylarktest.data.remote.model.Episode;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -23,26 +25,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Implementation of the Local Data source with {@link SharedPreferences}
  */
+@Singleton
 public class SkylarkLocalDataSource implements SkylarkDataSource {
 
-    private static SkylarkLocalDataSource INSTANCE;
 
     private Context mContext;
 
-    /**
-     * Get instance of this {@link SkylarkLocalDataSource}
-     *
-     * @param context context to get the {@link SharedPreferences}
-     * @return
-     */
-    public static SkylarkLocalDataSource getINSTANCE(@NonNull Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = new SkylarkLocalDataSource(context);
-        }
-        return INSTANCE;
-    }
-
-    private SkylarkLocalDataSource(@NonNull Context context) {
+    public SkylarkLocalDataSource(@NonNull Context context) {
         mContext = checkNotNull(context);
     }
 

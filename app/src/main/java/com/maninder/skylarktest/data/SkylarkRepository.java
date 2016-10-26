@@ -15,6 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -26,9 +29,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <p>
  * Maintains reference to both the repository {@link SkylarkRemoteDataSource} and {@link SkylarkLocalDataSource}
  */
+@Singleton
 public class SkylarkRepository implements SkylarkDataSource {
-
-    private static SkylarkRepository INSTANCE = null;
 
     /**
      * This variable is used to hold the Set reference, we don't need to required new remote information every time
@@ -40,22 +42,12 @@ public class SkylarkRepository implements SkylarkDataSource {
     private final SkylarkDataSource mSkylarkLocalDataSource;
 
     /**
-     * Returns the single instance of this class, creating it if necessary.
-     *
      * @param skylarkLocalDataSource  the device storage data source
      * @param skylarkRemoteDataSource the backend data source
-     * @return the {@link SkylarkRepository} instance
      */
-    public static SkylarkRepository getINSTANCE(@NonNull SkylarkDataSource skylarkLocalDataSource,
-                                                @NonNull SkylarkDataSource skylarkRemoteDataSource) {
-        if (INSTANCE == null) {
-            INSTANCE = new SkylarkRepository(skylarkLocalDataSource, skylarkRemoteDataSource);
-        }
-        return INSTANCE;
-    }
-
-    private SkylarkRepository(@NonNull SkylarkDataSource skylarkLocalDataSource,
-                              @NonNull SkylarkDataSource skylarkRemoteDataSource) {
+    @Inject
+    public SkylarkRepository(@Local @NonNull SkylarkDataSource skylarkLocalDataSource,
+                              @Remote @NonNull SkylarkDataSource skylarkRemoteDataSource) {
 
         mSkylarkLocalDataSource = checkNotNull(skylarkLocalDataSource);
         mSkylarkRemoteDataSource = checkNotNull(skylarkRemoteDataSource);
